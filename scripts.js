@@ -1,6 +1,8 @@
 let refresh = 0;
 let loaded = 4;
 
+let button = document.getElementById("showMore");
+
 function truncate(str, n) {
   return str?.length > n ? str.substring(0, n - 1) + "..." : str;
 }
@@ -15,6 +17,9 @@ const showUsers = (refresh, loaded) => {
     .then((data) => {
       let info = data.slice(refresh, loaded);
       console.log(info);
+      if (loaded >= data.length) {
+        button.className = "hidden";
+      }
       appendData(info);
     })
     .catch((err) => console.log(err));
@@ -133,8 +138,6 @@ const appendData = (data) => {
   }
   console.log(root);
 };
-
-let button = document.getElementById("showMore");
 
 button.onclick = (e) => {
   e.preventDefault();
