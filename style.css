@@ -167,30 +167,29 @@ body {
   }
 
   #focus {
+    width: 360px;
     bottom: 20%;
     left: 0;
   }
 
   #focus #focusProfilePic {
     position: relative;
-    display: block;
   }
 
   #focus #focusImage {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
   }
 
   #focus #focusUserInfo {
     position: relative;
-    display: block;
     width: 50%;
     right: 0;
   }
 
   #focus #focusCaption {
     position: relative;
-    display: block;
+
     width: 50%;
     right: 0;
   }
