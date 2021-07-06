@@ -18,7 +18,7 @@ const showUsers = (refresh, loaded) => {
       let info = data.slice(refresh, loaded);
       console.log(info);
       if (loaded >= data.length) {
-        button.className = "hidden";
+        document.getElementById("showMore").remove();
       }
       appendData(info);
     })
@@ -45,11 +45,15 @@ const appendData = (data) => {
     name.innerHTML = data[i].name;
     name.className = "name";
     userInfo.appendChild(name);
-
     const instagram = document.createElement("img");
-    instagram.className = "instagram";
-    instagram.src = "./icons/instagram-logo.svg";
-
+    if (data[i].source_type == "facebook") {
+      instagram.className = "instagram";
+      instagram.src = "./icons/facebook.svg";
+    } else {
+      instagram.className = "instagram";
+      instagram.src = "./icons/instagram-logo.svg";
+    }
+    //use template string
     div.appendChild(instagram);
 
     const date = document.createElement("p");
@@ -114,6 +118,7 @@ const appendData = (data) => {
       innerDiv.appendChild(focusUserInfo);
 
       const focusCaption = caption.cloneNode(true);
+      focusCaption.innerHTML = data[i].caption;
       focusCaption.id = "focusCaption";
       innerDiv.appendChild(focusCaption);
 
@@ -136,13 +141,18 @@ const appendData = (data) => {
 
     root.appendChild(div);
   }
+
   console.log(root);
 };
 
 button.onclick = (e) => {
   e.preventDefault();
-  loaded += 4;
+  const data = (loaded += 4);
   refresh += 4;
+  const max = data.length;
+  if (loaded > max + 1) {
+    document.getElementById("showMore").remove();
+  }
   showUsers(refresh, loaded);
 };
 
